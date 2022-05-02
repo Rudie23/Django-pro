@@ -20,7 +20,7 @@ jobs:
     - name: Install dedependencies
       run: |
         pip install pipenv
-        sync pipenv --dev
+        pipenv sync --dev
     
     - name: Run automatic tests
       run: |
