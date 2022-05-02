@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/chechout@v2
+    - uses: actions/checkout@v2
     - name: Set up Python 3.10.4
       uses: actions/setup-python@v1
       with:
@@ -20,7 +20,7 @@ jobs:
     - name: Install dedependencies
       run: |
         pip install pipenv
-        sync pipenv --dev
+        pipenv sync --dev
     
     - name: Run automatic tests
       run: |
