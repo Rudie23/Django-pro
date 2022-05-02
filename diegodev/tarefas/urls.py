@@ -1,6 +1,7 @@
 
 from django.urls import path
-from views import home
+from diegodev.tarefas import views
+
 
 app_name = 'tarefas'
 
