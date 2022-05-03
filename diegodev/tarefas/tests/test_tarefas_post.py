@@ -1,11 +1,11 @@
+import pytest
 from django.urls import reverse
 from diegodev.tarefas.models import Tarefa
-import pytest
 
 
 @pytest.fixture
 def resposta(client, db):
-    resp = client.get(reverse('tarefas:home'), data={'nome': 'Tarefa'})
+    resp = client.post(reverse('tarefas:home'), data={'nome': 'Tarefa'})
     return resp
 
 
