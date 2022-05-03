@@ -22,4 +22,20 @@ def test_status_code(resposta_com_tarefa_pendente):
 
 def test_tarefa_feita(resposta_com_tarefa_pendente):
     assert Tarefa.objects.first().feita
-        
+
+
+@pytest.fixture
+def tarefa_feita(db):
+    return Tarefa.objects.create(nome='Tarefa 1', feita=False)
+
+
+@pytest.fixture
+def resposta_com_tarefa_feita(client, tarefa_feita):
+    resp = client.post(
+        reverse('tarefas:detalhe', kwargs={'tarefa_id': tarefa_feita.id}),
+        data={'nome': f'{tarefa_feita.nome}-editada'})
+    return resp
+
+
+def test_tarefa_pendente(resposta_com_tarefa_feita):
+    assert not Tarefa.objects.first().feita

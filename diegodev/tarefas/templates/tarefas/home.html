@@ -15,7 +15,7 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Descreva sua tarefa"
                      aria-label="Descreva sua tarefa" aria-describedby="button-addon2" name="nome">
-                    <button type="submit" class="btn btn-outline-secondary" id="button-addon2">Salvar</button>
+                    <button type="submit" class="btn btn-outline-secondary">Salvar</button>
                 </div>
                 <div class="form-text">{{ form.nome.errors }}</div>
             </form>
@@ -24,16 +24,34 @@
 
             {% for tarefa in tarefas_pendentes %}
 
-                <form>
-                    <div class="input-group mb-3">
-                        <div class="input-group-text">
-                          <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox para tarefa">
-                        </div>
-                        <input type="text" class="form-control" aria-label="Text input para tarefa" value="{{ tarefa.nome }}">
-                    </div>
-                </form>
+               <form action="{% url 'tarefas:detalhe' tarefa_id=tarefa.id %}" method="post">
+                {% csrf_token %}
+               <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Descreva sua tarefa" required="required"
+                           aria-label="Descreva sua tarefa" aria-describedby="button-addon2" name="nome" value="{{ tarefa.nome }}">
+                    <input type="hidden" value="checked" name="feita">
+                    <button type="submit" class="btn btn-success">Marcar como feito</button>
+               </div>
+               </form>
 
             {% endfor %}
+
+            <h2 class="mt-5">Tarefas feitas</h2>
+
+            {% for tarefa in tarefas_feitas %}
+
+               <form action="{% url 'tarefas:detalhe' tarefa_id=tarefa.id %}" method="post">
+                {% csrf_token %}
+               <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Descreva sua tarefa" required="required"
+                           aria-label="Descreva sua tarefa" aria-describedby="button-addon2" name="nome" value="{{ tarefa.nome }}">
+                    <button type="submit" class="btn btn-warning">Marcar como pendente</button>
+               </div>
+               </form>
+
+            {% endfor %}
+
+
 
         </div>
     </div>
