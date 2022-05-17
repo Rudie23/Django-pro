@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Tarefas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
 
@@ -20,6 +21,19 @@
                 </div>
                 <div id="emailHelp" class="form-text">{{ form.nome.errors }}</div>
             </form>
+            <h2 class="mt-5">Tarefas pendentes</h2>
+            {% for tarefa in tarefas_pendentes %}
+                <form>
+                    <div class="input-group mb-3">
+                        <div class="input-group-text">
+                            <input class="form-check-input mt-0" type="checkbox" value=""
+                                   aria-label="Checkbox for following text input">
+                        </div>
+                        <input type="text" class="form-control" aria-label="Text input para tarefa"
+                               value="{{ tarefa.nome }}">
+                    </div>
+                </form>
+            {% endfor %}
         </div>
     </div>
 </div>
