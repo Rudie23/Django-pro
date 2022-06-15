@@ -8,10 +8,10 @@ from diegodev.tarefas.models import Tarefa
 
 def home(request):
     if request.method == 'POST':
-        form = TarefaNovaForm(request.POST)
+        form = TarefaNovaForm(request.POST)  # UM DICT QUE CONTÉM OS DADOS QUE FORAM ENVIADOS PELO POST
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('tarefas:home'))
+            form.save()  # OS DADOS SERÃO SALVOS NO FORMULÁRIO
+            return HttpResponseRedirect(reverse('tarefas:home'))  # PARA O USUÁRIO IR PARA PÁGINA INICIAL
         else:
             tarefas_pendentes = Tarefa.objects.filter(feita=False).all()
             tarefas_feitas = Tarefa.objects.filter(feita=True).all()
