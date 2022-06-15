@@ -7,7 +7,7 @@ from diegodev.tarefas.models import Tarefa
 
 @pytest.fixture
 def resposta(client, db):
-    resp = client.get(reverse('tarefas:home'))
+    resp = client.get(reverse('tarefas:home'))  # nome da app e nome da view
     return resp
 
 
@@ -29,7 +29,7 @@ def lista_de_tarefas_pendentes(db):
         Tarefa(nome='Tarefa 1', feita=False),
         Tarefa(nome='Tarefa 2', feita=False),
     ]
-    Tarefa.objects.bulk_create(tarefas)
+    Tarefa.objects.bulk_create(tarefas)  # o bulk serve para criar várias tarefas
     return tarefas
 
 
@@ -39,7 +39,7 @@ def lista_de_tarefas_feitas(db):
         Tarefa(nome='Tarefa 3', feita=True),
         Tarefa(nome='Tarefa 4', feita=True),
     ]
-    Tarefa.objects.bulk_create(tarefas)
+    Tarefa.objects.bulk_create(tarefas)  # o bulk serve para criar várias tarefas
     return tarefas
 
 

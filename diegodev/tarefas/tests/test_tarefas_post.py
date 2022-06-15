@@ -6,7 +6,8 @@ from diegodev.tarefas.models import Tarefa
 
 @pytest.fixture
 def resposta(client, db):
-    resp = client.post(reverse('tarefas:home'), data={'nome': 'Tarefa'})
+    resp = client.post(reverse('tarefas:home'), data={'nome': 'Tarefa'})  # O NOME DA PROPRIEDADE DA TAREFA FOI DADO DE
+    # nome NA TEMPLATE
     return resp
 
 
@@ -14,6 +15,7 @@ def test_tarefa_existe_no_bd(resposta):
     assert Tarefa.objects.exists()
 
 
+# TESTE DE REDIRECIONAMENTO. USA O CÓDIGO 302
 def test_redirecionamento_depois_do_salvamento(resposta):
     assert resposta.status_code == 302
 
