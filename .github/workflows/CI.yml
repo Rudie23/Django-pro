@@ -5,23 +5,36 @@ on: [pull_request]
 jobs:
   build:
     env:
-      PIPENV_NO_INHERIT: 1
-      PIPENV_IGNORE_VIRTUALENVS: 1
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports: [ '5432:5432' ]
 
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
       uses: actions/setup-python@v1
       with:
-        python-version: 3.10.5
+        python-version: 3.10.7
+        architecture: x64
+        cache: 'pip'
     
-    - name: Install dependencies
+    - name: Copiar Configurações .env
       run: |
-        pip install pipenv
-        pipenv sync --dev
+        cp contrib/env-sample .env
     
-    - name: Run automatic tests
+    - name: Instalar dependências
       run: |
-        pipenv run pytest diegodev
+        pip install -r requirements-dev.txt
+
+    - name: Rodar Testes Automáticos
+      run: |
+        pytest
