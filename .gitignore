@@ -130,3 +130,5 @@ dmypy.json
 
 # Pytest do Vscode
 .vscode
+
+staticfiles
